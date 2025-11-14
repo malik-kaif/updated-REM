@@ -3,25 +3,172 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Room Expense Manager (Secure)</title>
+<title>Room Expense Manager (Premium)</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-  body { font-family: Arial, sans-serif; background: #f4f7fa; margin: 0; padding: 20px; max-width: 900px; margin-left:auto; margin-right:auto;}
-  h1 { color: #0077cc; }
-  table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-  table, th, td { border: 1px solid #ccc; }
-  th, td { padding: 10px; text-align: center; vertical-align: top; }
-  input, select { padding: 5px; margin: 5px 0; }
-  button { padding: 8px 16px; border: none; background-color: #0077cc; color: white; cursor: pointer; border-radius: 5px; transition: all 0.3s ease; }
-  button:hover { background-color: #005fa3; transform: scale(1.05); }
-  .add-expense { font-size: 1.1rem; padding: 10px 22px; font-weight: bold; }
-  .summary { margin-top: 30px; background: #eaf3fc; padding: 15px; border-radius: 8px; }
-  #changeLog { margin-top: 30px; background: #fff4e5; padding: 15px; border-radius: 8px; border: 1px solid #ffc107; max-height: 220px; overflow-y: auto; }
-  #changeLog h3 { margin-top: 0; color: #cc8400; }
-  .log-entry { font-size: 0.9rem; padding: 3px 5px; border-bottom: 1px solid #ffd966; text-align: left; }
-  #loginScreen { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background: #f0f6ff; }
-  #loginBox { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-  #appContent { display: none; } /* hidden until password is correct */
+
+/* -------------------- PREMIUM UI THEME -------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", Arial, sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #dfe9f3, #ffffff);
+  padding: 20px;
+  animation: fadeInPage 1s ease-in-out;
+  max-width: 1000px;
+  margin: auto;
+}
+
+/* Premium Fade Animation */
+@keyframes fadeInPage {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Premium Headings */
+h1 {
+  color: #0d6efd;
+  font-size: 2.4rem;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+h3 {
+  color: #0d6efd;
+  margin-top: 25px;
+}
+
+/* -------------------- PREMIUM GLASS CARD -------------------- */
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  margin-top: 15px;
+  animation: slideUp 0.7s ease forwards;
+  opacity: 0;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(25px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* -------------------- PREMIUM FORM -------------------- */
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin: 7px 0;
+  border-radius: 10px;
+  border: 1px solid #cce0ff;
+  background: #f9fbff;
+  transition: 0.3s;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: #0d6efd;
+  box-shadow: 0 0 8px rgba(13,110,253,0.3);
+}
+
+/* -------------------- PREMIUM BUTTON -------------------- */
+button {
+  background: #0d6efd;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 12px;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.25s ease;
+  font-weight: 500;
+}
+
+button:hover {
+  transform: scale(1.06);
+  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+}
+
+button.delete {
+  background: #d9534f;
+}
+button.delete:hover {
+  box-shadow: 0 6px 20px rgba(217, 83, 79, 0.4);
+}
+
+/* -------------------- PREMIUM TABLE -------------------- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  overflow: hidden;
+  border-radius: 14px;
+}
+
+th {
+  background: #0d6efd;
+  color: white;
+  padding: 12px;
+  font-weight: 500;
+}
+
+td {
+  padding: 10px;
+  background: white;
+  border-bottom: 1px solid #eee;
+}
+
+tr:hover td {
+  background: #f2f8ff;
+}
+
+/* -------------------- PREMIUM LOGIN SCREEN -------------------- */
+#loginScreen {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(120deg, #c5d8ff, #ffffff);
+  animation: fadeInLogin 0.8s ease;
+}
+
+@keyframes fadeInLogin {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+#loginBox {
+  background: rgba(255,255,255,0.8);
+  padding: 35px;
+  border-radius: 18px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  width: 330px;
+  text-align: center;
+  animation: slideUp 0.8s ease;
+}
+
+@keyframes fadeOutLogin {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.log-entry {
+  background: #fff7d6;
+  padding: 6px;
+  margin: 4px 0;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
 </style>
 </head>
 
@@ -30,277 +177,382 @@
 <!-- 🔒 Login Screen -->
 <div id="loginScreen">
   <div id="loginBox">
-    <h2>🔐 Enter Website Password</h2>
+    <h2 style="color:#0d6efd;">🔐 Enter Password</h2>
     <input type="password" id="sitePassword" placeholder="Enter Password" />
-    <br/>
+    <br/><br/>
     <button id="loginBtn">Login</button>
-    <p id="loginError" style="color:red; display:none;">❌ nikal ja bhosdi ke!</p>
+    <p id="loginError" style="color:red; display:none; margin-top:10px;">❌ Incorrect Password</p>
   </div>
 </div>
 
-<!-- 🌐 Main App -->
-<div id="appContent">
+<!-- 🌐 App Content -->
+<div id="appContent" style="display:none;">
 <h1>Room Expense Manager</h1>
 
-<p style="font-weight:bold; color:#0077cc;">🟢 Active Users: <span id="activeUsers">0</span></p>
+<div class="glass-card">
+<p style="font-weight:bold; color:#0d6efd;">🟢 Active Users: <span id="activeUsers">0</span></p>
 <div id="userList"></div>
+</div>
 
+<div class="glass-card">
 <h3>Add Expense</h3>
 <form id="expenseForm">
-  <label for="payer">Payer:</label>
-  <select id="payer" name="payer" required>
+
+  <label>Payer:</label>
+  <select id="payer" required>
     <option value="">--Select Student--</option>
     <option value="Kaif">Kaif</option>
     <option value="Surkhab">Surkhab</option>
     <option value="Faizan">Faizan</option>
     <option value="Furqan">Furqan</option>
-  </select><br/>
+  </select>
   
-  <label for="description">Description:</label>
-  <input type="text" id="description" name="description" required placeholder="Expense description" /><br/>
-  
-  <label for="amount">Amount (₹):</label>
-  <input type="number" id="amount" name="amount" min="0.01" step="0.01" required placeholder="Amount spent" /><br/>
-  
-  <button type="submit" class="add-expense">➕ Add Expense</button>
-</form>
+  <label>Description:</label>
+  <input type="text" id="description" required />
 
+  <label>Amount (₹):</label>
+  <input type="number" id="amount" step="0.01" min="0.01" required />
+
+  <button type="submit" style="margin-top:10px;">➕ Add Expense</button>
+</form>
+</div>
+
+<div class="glass-card">
 <h3>Expenses List</h3>
 <table id="expenseTable">
-  <thead>
-    <tr>
-      <th>Payer</th>
-      <th>Description</th>
-      <th>Amount (₹)</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody></tbody>
+<thead>
+  <tr>
+    <th>Payer</th>
+    <th>Description</th>
+    <th>Amount (₹)</th>
+    <th>Actions</th>
+  </tr>
+</thead>
+<tbody></tbody>
 </table>
-
-<div class="summary">
-  <h3>Summary</h3>
-  <div id="summaryContent"></div>
 </div>
 
-<div id="changeLog">
-  <h3>Change Log 
-    <button id="clearLogBtn" style="float:right; background:#d9534f;">🧹 Clear Log</button>
-  </h3>
-  <table style="width: 100%; border-collapse: collapse;">
-    <thead>
-      <tr>
-        <th>Student</th>
-        <th>Change History</th>
-      </tr>
-    </thead>
-    <tbody id="logEntries">
-      <tr><td colspan="2" style="text-align:center; color:#777;">No changes yet.</td></tr>
-    </tbody>
-  </table>
+<div class="glass-card summary">
+<h3>Summary</h3>
+<div id="summaryContent"></div>
 </div>
-</div> <!-- End of app content -->
+
+<div class="glass-card" id="changeLog">
+<h3>Change Log 
+  <button id="clearLogBtn" style="float:right; background:#d9534f;">🧹 Clear</button>
+</h3>
+<table style="width:100%;">
+<thead>
+  <tr>
+    <th>Student</th>
+    <th>Change History</th>
+  </tr>
+</thead>
+<tbody id="logEntries">
+  <tr><td colspan="2" style="text-align:center; color:#777;">No changes yet.</td></tr>
+</tbody>
+</table>
+</div>
 
 <script type="module">
-  // 🔒 Site password setup
-  const correctPassword = "12340"; // Change this anytime
-  const loginBtn = document.getElementById('loginBtn');
-  const loginError = document.getElementById('loginError');
-  loginBtn.addEventListener('click', () => {
-    const input = document.getElementById('sitePassword').value;
-    if (input === correctPassword) {
-      document.getElementById('loginScreen').style.display = 'none';
-      document.getElementById('appContent').style.display = 'block';
-    } else {
-      loginError.style.display = 'block';
-    }
-  });
 
-  // ✅ Firebase Integration
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-  import { 
-    getDatabase, ref, onChildAdded, onChildChanged, onChildRemoved,
-    onValue, push, set, update, remove, onDisconnect 
-  } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
+/* ---------------- LOGIN SYSTEM ---------------- */
+const correctPassword = "12340";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyDgGr0ZaYNCXnl-XQ-rsARjPoE7f_Px15g",
-    authDomain: "updated-rem.firebaseapp.com",
-    databaseURL: "https://updated-rem-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "updated-rem",
-    storageBucket: "updated-rem.appspot.com",
-    messagingSenderId: "231656121503",
-    appId: "1:231656121503:web:d06e31fea1233f74802eaa"
-  };
+document.getElementById("loginBtn").addEventListener("click", () => {
+  const input = document.getElementById("sitePassword").value;
 
-  const app = initializeApp(firebaseConfig);
-  const database = getDatabase(app);
-  const adminPassword = "4321"; // Separate admin password for Clear Log & user removal
+  if (input === correctPassword) {
+    const loginScreen = document.getElementById("loginScreen");
+    loginScreen.style.animation = "fadeOutLogin 0.6s forwards";
 
-  const expenseForm = document.getElementById('expenseForm');
-  const expenseTableBody = document.querySelector('#expenseTable tbody');
-  const summaryContent = document.getElementById('summaryContent');
-  const logEntries = document.getElementById('logEntries');
-  const clearLogBtn = document.getElementById('clearLogBtn');
+    setTimeout(() => {
+      loginScreen.style.display = "none";
+      document.getElementById("appContent").style.display = "block";
+    }, 600);
 
-  const expensesRef = ref(database, 'expenses');
-  const changeLogRef = ref(database, 'changeLog');
-  const connectionsRef = ref(database, 'connections');
-  const connectedRef = ref(database, '.info/connected');
+  } else {
+    document.getElementById("loginError").style.display = "block";
+  }
+});
 
-  const students = ['Kaif', 'Surkhab', 'Faizan', 'Furqan'];
-  let expenses = {}, changeLog = [];
+/* ---------------- FIREBASE SETUP ---------------- */
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
 
-  // ✅ Presence Tracking
-  onValue(connectedRef, (snap) => {
-    if (snap.val() === true) {
-      const con = push(connectionsRef);
-      set(con, { connectedAt: new Date().toISOString() });
-      onDisconnect(con).remove();
-    }
-  });
+import { 
+  getDatabase, ref, onChildAdded, onChildChanged, onChildRemoved,
+  onValue, push, set, update, remove, onDisconnect 
+} from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
 
-  // ✅ Active Users List
-  onValue(connectionsRef, (snapshot) => {
-    const data = snapshot.val();
-    const count = data ? Object.keys(data).length : 0;
-    document.getElementById('activeUsers').textContent = count;
+const firebaseConfig = {
+  apiKey: "AIzaSyDgGr0ZaYNCXnl-XQ-rsARjPoE7f_Px15g",
+  authDomain: "updated-rem.firebaseapp.com",
+  databaseURL: "https://updated-rem-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "updated-rem",
+  storageBucket: "updated-rem.appspot.com",
+  messagingSenderId: "231656121503",
+  appId: "1:231656121503:web:d06e31fea1233f74802eaa"
+};
 
-    const userListDiv = document.getElementById('userList');
-    if (!data) {
-      userListDiv.innerHTML = '<em>No active users.</em>';
-      return;
-    }
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
 
-    let html = `<h3>Active Users List</h3>
-      <table border="1" width="100%" style="border-collapse:collapse;">
-      <tr><th>User ID</th><th>Connected At</th><th>Action</th></tr>`;
-    for (let key in data) {
-      html += `
-        <tr>
-          <td>${key}</td>
-          <td>${new Date(data[key].connectedAt).toLocaleString()}</td>
-          <td><button onclick="removeUser('${key}')">Remove</button></td>
-        </tr>`;
-    }
-    html += '</table>';
-    userListDiv.innerHTML = html;
-  });
+const adminPassword = "4321";
 
-  // ✅ Remove User (Admin Only)
-  window.removeUser = async function(id) {
-    const pass = prompt("Enter admin password to remove user:");
-    if (pass !== adminPassword) return alert("❌ Wrong password!");
-    await remove(ref(database, 'connections/' + id));
-    alert("✅ User removed!");
-  };
+/* ---------------- DB REFERENCES ---------------- */
+const expensesRef = ref(db, "expenses");
+const changeLogRef = ref(db, "changeLog");
+const connectionsRef = ref(db, "connections");
+const connectedRef = ref(db, ".info/connected");
 
-  // ✅ Clear Log (Admin Only)
-  clearLogBtn.addEventListener('click', async () => {
-    const pass = prompt("Enter admin password to clear log:");
-    if (pass !== adminPassword) return alert("❌ Wrong password!");
-    if (confirm("Are you sure you want to clear all logs?")) {
-      await remove(changeLogRef);
-      alert("✅ Change log cleared!");
-    }
-  });
+const students = ["Kaif", "Surkhab", "Faizan", "Furqan"];
+let expenses = {};
+let changeLog = [];
 
-  // ✅ Expense CRUD
-  onChildAdded(expensesRef, snap => { expenses[snap.key] = snap.val(); renderExpenses(); });
-  onChildChanged(expensesRef, snap => { expenses[snap.key] = snap.val(); renderExpenses(); });
-  onChildRemoved(expensesRef, snap => { delete expenses[snap.key]; renderExpenses(); });
+/* ---------------- TRACKING ONLINE USERS ---------------- */
+onValue(connectedRef, snap => {
+  if (snap.val() === true) {
+    const con = push(connectionsRef);
+    set(con, { connectedAt: new Date().toISOString() });
+    onDisconnect(con).remove();
+  }
+});
 
-  onValue(changeLogRef, snap => {
-    const data = snap.val();
-    changeLog = data ? Object.values(data) : [];
-    renderChangeLog();
-  });
+onValue(connectionsRef, snapshot => {
+  const data = snapshot.val();
+  const count = data ? Object.keys(data).length : 0;
 
-  expenseForm.addEventListener('submit', async e => {
-    e.preventDefault();
-    const payer = document.getElementById('payer').value;
-    const description = document.getElementById('description').value.trim();
-    const amount = parseFloat(document.getElementById('amount').value);
-    if (!payer || !description || isNaN(amount) || amount <= 0) return alert("Invalid input");
+  document.getElementById("activeUsers").textContent = count;
 
-    const newRef = push(expensesRef);
-    await set(newRef, { payer, description, amount });
-    const logRef = push(changeLogRef);
-    await set(logRef, { action: 'Added', detail: `${payer} added "${description}" ₹${amount}`, time: new Date().toLocaleString() });
-    expenseForm.reset();
-  });
+  const div = document.getElementById("userList");
 
-  window.editExpense = async id => {
-    const exp = expenses[id];
-    const desc = prompt("Edit Description:", exp.description);
-    if (desc === null) return;
-    const amt = prompt("Edit Amount (₹):", exp.amount);
-    const num = parseFloat(amt);
-    if (!desc.trim() || isNaN(num) || num <= 0) return alert("Invalid input");
-    await update(ref(database, 'expenses/' + id), { description: desc.trim(), amount: num });
-    const logRef = push(changeLogRef);
-    await set(logRef, { action: 'Edited', detail: `${exp.payer} updated to "${desc}" ₹${num}`, time: new Date().toLocaleString() });
-  };
-
-  window.deleteExpense = async id => {
-    if (!confirm("Delete this expense?")) return;
-    const exp = expenses[id];
-    await remove(ref(database, 'expenses/' + id));
-    const logRef = push(changeLogRef);
-    await set(logRef, { action: 'Deleted', detail: `${exp.payer} deleted "${exp.description}" ₹${exp.amount}`, time: new Date().toLocaleString() });
-  };
-
-  function renderExpenses() {
-    expenseTableBody.innerHTML = '';
-    Object.entries(expenses).forEach(([id, exp]) => {
-      const amt = Number(exp.amount) || 0;
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td>${exp.payer}</td>
-        <td>${exp.description}</td>
-        <td>₹${amt.toFixed(2)}</td>
-        <td>
-          <button onclick="editExpense('${id}')">Edit</button>
-          <button onclick="deleteExpense('${id}')" style="background:#d9534f;">Delete</button>
-        </td>`;
-      expenseTableBody.appendChild(tr);
-    });
-    renderSummary();
+  if (!data) {
+    div.innerHTML = "<em>No active users.</em>";
+    return;
   }
 
-  function renderSummary() {
-    const list = Object.values(expenses);
-    const total = list.reduce((s, e) => s + (Number(e.amount) || 0), 0);
-    const share = total / students.length;
-    let spent = {};
-    students.forEach(s => spent[s] = 0);
-    list.forEach(e => spent[e.payer] += e.amount);
+  let html = `
+  <table style='width:100%'>
+    <tr><th>User ID</th><th>Connected At</th><th>Action</th></tr>
+  `;
 
-    let html = `<p><b>Total:</b> ₹${total.toFixed(2)} | <b>Share:</b> ₹${share.toFixed(2)}</p>`;
-    html += `<table border="1" width="100%" style="border-collapse:collapse;"><tr><th>Student</th><th>Spent</th><th>Balance</th></tr>`;
-    students.forEach(s => {
-      const bal = spent[s] - share;
-      html += `<tr><td>${s}</td><td>₹${spent[s].toFixed(2)}</td><td style="color:${bal>=0?'green':'red'};">₹${bal.toFixed(2)}</td></tr>`;
-    });
-    html += '</table>';
-    summaryContent.innerHTML = html;
+  for (let id in data) {
+    html += `
+    <tr>
+      <td>${id}</td>
+      <td>${new Date(data[id].connectedAt).toLocaleString()}</td>
+      <td><button class='delete' onclick="removeUser('${id}')">Remove</button></td>
+    </tr>`;
   }
 
-  function renderChangeLog() {
-    if (changeLog.length === 0) {
-      logEntries.innerHTML = `<tr><td colspan="2" style="text-align:center;">No changes yet.</td></tr>`;
-      return;
-    }
-    let rows = '';
-    students.forEach(s => {
-      const logs = changeLog.filter(l => l.detail.includes(s));
-      rows += `<tr><td>${s}</td><td>`;
-      if (logs.length === 0) rows += '<em>No changes</em>';
-      else logs.forEach(l => rows += `<div class="log-entry">${l.time} - <b>${l.action}</b>: ${l.detail}</div>`);
-      rows += '</td></tr>';
-    });
-    logEntries.innerHTML = rows;
+  html += "</table>";
+  div.innerHTML = html;
+});
+
+/* ---------------- REMOVE USER ---------------- */
+window.removeUser = async id => {
+  const pass = prompt("Enter admin password:");
+
+  if (pass !== adminPassword)
+    return alert("❌ Wrong password!");
+
+  await remove(ref(db, "connections/" + id));
+  alert("✅ User removed!");
+};
+
+/* ---------------- CLEAR CHANGE LOG ---------------- */
+document.getElementById("clearLogBtn").addEventListener("click", async () => {
+  const pass = prompt("Enter admin password:");
+
+  if (pass !== adminPassword)
+    return alert("❌ Wrong password!");
+
+  if (confirm("Clear all logs?")) {
+    await remove(changeLogRef);
+    alert("✅ Change log cleared!");
   }
+});
+
+/* ---------------- ADD EXPENSE (NO LOGGING!) ---------------- */
+document.getElementById("expenseForm").addEventListener("submit", async e => {
+  e.preventDefault();
+
+  const payer = document.getElementById("payer").value;
+  const desc  = document.getElementById("description").value.trim();
+  const amt   = parseFloat(document.getElementById("amount").value);
+
+  if (!payer || !desc || isNaN(amt) || amt <= 0)
+    return alert("Invalid input!");
+
+  const newRef = push(expensesRef);
+  await set(newRef, { payer, description: desc, amount: amt });
+
+  // ❌ no logging for ADDING
+  e.target.reset();
+});
+
+/* ---------------- EDIT EXPENSE (LOGGED) ---------------- */
+window.editExpense = async id => {
+  const exp = expenses[id];
+
+  const newDesc = prompt("Edit description:", exp.description);
+  if (newDesc === null) return;
+
+  const newAmt = prompt("Edit amount (₹):", exp.amount);
+  const num = parseFloat(newAmt);
+
+  if (!newDesc.trim() || isNaN(num) || num <= 0)
+    return alert("Invalid input!");
+
+  await update(ref(db, "expenses/" + id), {
+    description: newDesc.trim(),
+    amount: num
+  });
+
+  const log = push(changeLogRef);
+  await set(log, {
+    action: "Edited",
+    detail: `${exp.payer} updated to "${newDesc}" ₹${num}`,
+    time: new Date().toLocaleString()
+  });
+};
+
+/* ---------------- DELETE EXPENSE (LOGGED) ---------------- */
+window.deleteExpense = async id => {
+  if (!confirm("Delete this expense?")) return;
+
+  const exp = expenses[id];
+  await remove(ref(db, "expenses/" + id));
+
+  const log = push(changeLogRef);
+  await set(log, {
+    action: "Deleted",
+    detail: `${exp.payer} deleted "${exp.description}" ₹${exp.amount}`,
+    time: new Date().toLocaleString()
+  });
+};
+
+/* ---------------- LISTEN FOR DATABASE CHANGES ---------------- */
+onChildAdded(expensesRef, snap => {
+  expenses[snap.key] = snap.val();
+  renderExpenses();
+});
+
+onChildChanged(expensesRef, snap => {
+  expenses[snap.key] = snap.val();
+  renderExpenses();
+});
+
+onChildRemoved(expensesRef, snap => {
+  delete expenses[snap.key];
+  renderExpenses();
+});
+
+onValue(changeLogRef, snap => {
+  const data = snap.val();
+  changeLog = data ? Object.values(data) : [];
+  renderChangeLog();
+});
+
+/* ---------------- RENDER FUNCTIONS ---------------- */
+function renderExpenses() {
+  const tbody = document.querySelector("#expenseTable tbody");
+  tbody.innerHTML = "";
+
+  Object.entries(expenses).forEach(([id, exp]) => {
+    const tr = document.createElement("tr");
+
+    tr.innerHTML = `
+      <td>${exp.payer}</td>
+      <td>${exp.description}</td>
+      <td>₹${Number(exp.amount).toFixed(2)}</td>
+      <td>
+        <button onclick="editExpense('${id}')">Edit</button>
+        <button class="delete" onclick="deleteExpense('${id}')">Delete</button>
+      </td>
+    `;
+
+    tbody.appendChild(tr);
+  });
+
+  renderSummary();
+}
+
+function renderSummary() {
+  const list = Object.values(expenses);
+  const total = list.reduce((sum, e) => sum + Number(e.amount), 0);
+  const share = students.length ? total / students.length : 0;
+
+  let spent = {};
+  students.forEach(s => (spent[s] = 0));
+
+  list.forEach(e => {
+    if (spent[e.payer] !== undefined) spent[e.payer] += Number(e.amount);
+  });
+
+  let html = `
+    <p><b>Total:</b> ₹${total.toFixed(2)} |
+    <b>Share per person:</b> ₹${share.toFixed(2)}</p>
+  `;
+
+  html += `<table style="width:100%; border-collapse:collapse;">
+    <tr style="background:#f6f9ff;">
+      <th>Student</th><th>Spent</th><th>Balance</th>
+    </tr>`;
+
+  students.forEach(s => {
+    const bal = spent[s] - share;
+    html += `
+    <tr>
+      <td>${s}</td>
+      <td>₹${spent[s].toFixed(2)}</td>
+      <td style="color:${bal >= 0 ? "green" : "red"};">
+        ₹${bal.toFixed(2)}
+      </td>
+    </tr>`;
+  });
+
+  html += `</table>`;
+  document.getElementById("summaryContent").innerHTML = html;
+}
+
+function renderChangeLog() {
+  const tbody = document.getElementById("logEntries");
+
+  if (!changeLog.length) {
+    tbody.innerHTML = `<tr><td colspan="2" style="text-align:center;color:#777;">No changes yet.</td></tr>`;
+    return;
+  }
+
+  let rows = "";
+  students.forEach(s => {
+    const logs = changeLog.filter(l => l.detail.includes(s));
+
+    rows += `
+    <tr>
+      <td>${s}</td>
+      <td>
+        ${
+          logs.length
+            ? logs
+                .map(
+                  l =>
+                    `<div class="log-entry">${l.time} - <b>${l.action}</b>: ${l.detail}</div>`
+                )
+                .join("")
+            : "<em>No changes</em>"
+        }
+      </td>
+    </tr>`;
+  });
+
+  tbody.innerHTML = rows;
+}
+
+/* Quick fail-safe initial render */
+renderExpenses();
+renderChangeLog();
+
 </script>
 </body>
 </html>
